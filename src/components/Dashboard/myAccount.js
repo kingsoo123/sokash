@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     width: '21px',
     border: '1px solid #007945',
     borderRadius: '50px',
-    minWidth: '90%',
+    minWidth: '60%',
     margin: 30,
     color: "#ffffff",
     backgroundColor: "#007945",
@@ -65,11 +65,19 @@ export default function MyAccount() {
 
             </Grid>
             <Grid item xs={6}>
-            <Paper className={classes.paper}>boooom</Paper>
+            <Paper className={classes.paper}>
+            <Typography variant="h4" gutterBottom>
+            TAKE A LOAN
+            </Typography>
+            </Paper>
 
             </Grid>
             <Grid item xs={6}>
-            <Paper className={classes.paper}>button</Paper>
+            <Paper className={classes.paper}>
+            <Typography variant="h4" gutterBottom>
+               PAYBACK
+            </Typography>
+            </Paper>
 
             </Grid>
         </Grid>
