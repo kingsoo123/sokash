@@ -2,6 +2,7 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {Typography, TextField, makeStyles, Grid, Button, InputAdornment, withStyles} from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import {Link} from 'react-router-dom';
 import  logo from './logo-main.png';
 import  google from './google.png';
 
@@ -12,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     '& > *': {
       textAlign: 'center',
     },
-    
   },
   cont:{
     textAlign: 'center',
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   button:{
     height: '28px',
     width: '71px',
-    
+    border: '1px solid #007945',
     borderRadius: '50px',
     minWidth: '60%',
     margin: 30,
@@ -37,10 +37,11 @@ const useStyles = makeStyles((theme) => ({
     width: '21px',
     borderRadius: '50px',
     border: '1px solid #FFC107',
-    minWidth: '80%',
+    minWidth: '60%',
     margin: 10,
     color: "#171D33",
     backgroundColor: "#E5E5E5",
+    fontSize: '1vh',
     "&:hover":{
        color:"#171D33",
        backgroundColor: "#ffffff",
@@ -71,7 +72,7 @@ const CssTextField = withStyles({
     },
   },
 })(TextField);
-export default function SimpleContainer() {
+export default function Register() {
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -115,6 +116,10 @@ export default function SimpleContainer() {
     <Button className={classes.buttonGoogle} variant="contained">
         <img style={{ margin: 10}} src={google} height="15px" width="15px" ></img>  Sign in with Google 
       </Button>
+      <br></br>
+      <Typography  component={Link} to="/" variant="body2" style={{color: 'black', textDecoration: 'none'}} gutterBottom>
+        Already have an account? <span style={{color: '#23D123', cursor: 'pointer', fontWeight: 'bolder'}}  component={Link} to="/">Sign in </span>
+      </Typography>
     </Container>
     </React.Fragment>
   );
