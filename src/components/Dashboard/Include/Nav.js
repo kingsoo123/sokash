@@ -9,6 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import {Link} from 'react-router-dom';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 
@@ -23,7 +24,7 @@ import ContactSupportOutlinedIcon from '@material-ui/icons/ContactSupportOutline
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import GroupAddOutlinedIcon from '@material-ui/icons/GroupAddOutlined';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
-
+import PostAddOutlinedIcon from '@material-ui/icons/PostAddOutlined';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -47,6 +48,7 @@ export default function SelectedListItem() {
        
       <List component="nav" aria-label="main mailbox folders">
         <ListItem
+          component={Link} to="/account"
           button
           selected={selectedIndex === 0}
           onClick={(event) => handleListItemClick(event, 0)}
@@ -57,6 +59,7 @@ export default function SelectedListItem() {
           <ListItemText primary="My Account" />
         </ListItem>
         <ListItem
+          component={Link} to="/account/dashboard"
           button
           selected={selectedIndex === 1}
           onClick={(event) => handleListItemClick(event, 1)}
@@ -67,6 +70,7 @@ export default function SelectedListItem() {
           <ListItemText primary="Dashboard" />
         </ListItem>
         <ListItem
+          component={Link} to="/account/loan-history"
           button
           selected={selectedIndex === 2}
           onClick={(event) => handleListItemClick(event, 2)}
@@ -75,7 +79,9 @@ export default function SelectedListItem() {
             <HistoryOutlinedIcon /> 
           </ListItemIcon>
           <ListItemText primary="Loan History" />
-        </ListItem><ListItem
+        </ListItem>
+        <ListItem
+          component={Link} to="/account/loan-calculator"
           button
           selected={selectedIndex === 3}
           onClick={(event) => handleListItemClick(event, 3)}
@@ -99,7 +105,7 @@ export default function SelectedListItem() {
           onClick={(event) => handleListItemClick(event, 5)}
         >
           <ListItemIcon>
-            <AnnouncementOutlinedIcon /> 
+            <PostAddOutlinedIcon /> 
           </ListItemIcon>
           <ListItemText primary="Recent News" />
         </ListItem><ListItem
@@ -141,6 +147,7 @@ export default function SelectedListItem() {
           <ListItemText primary="Refer and earn" />
         </ListItem>
         <ListItem
+          component={Link} to="/"
           button
           selected={selectedIndex === 10}
           onClick={(event) => handleListItemClick(event, 10)}

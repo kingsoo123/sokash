@@ -106,7 +106,7 @@ export default function Register() {
         fullWidth/>
         </Grid>
       </Grid>
-      <Button className={classes.button} variant="contained">
+      <Button component={Link} to="/verification" className={classes.button} variant="contained">
          Continue
       </Button>
     </form>

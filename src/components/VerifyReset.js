@@ -74,7 +74,7 @@ const CssTextField = withStyles({
     },
   })(TextField);
 
-export default function Verification() {
+export default function VerifyReset() {
   const classes = useStyles();
 
   const [passwordShown, setPasswordShown] = useState(false);
@@ -131,7 +131,7 @@ const [disable, setDisable] = useState(false);
       <Container className={classes.cont} maxWidth="sm">
        <img className="App" src={ logo } style={{margin: 40}} height="30%" width="30%"></img>
        <Typography variant="h4" gutterBottom>
-       Verification Code
+       Verify Reset Password Token
       </Typography>
       <Typography variant="body2" gutterBottom>
       An SMS with the 4-digit code has been sent to <p></p>+2348012345678
@@ -164,8 +164,8 @@ const [disable, setDisable] = useState(false);
             We will resend the code in 1:45
       </Typography>
        
-      <Button component={Link} to="/account/dashboard" className={classes.button} variant="contained">
-          Verify Phone Number
+      <Button component={Link} to="/reset-password" className={classes.button} variant="contained">
+          Verify Token
       </Button>
     </form>
    

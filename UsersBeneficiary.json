@@ -1,0 +1,177 @@
+{
+    "success": true,
+    "data": [
+        {
+            "id": 1,
+            "user_id": 2,
+            "account_number": "0778993320",
+            "institution_code": "000014",
+            "customer_name": "ABIMBOLA SOPHIA BAKARE",
+            "created_at": "2020-09-16T16:44:42.000000Z",
+            "updated_at": "2020-09-18T08:46:08.000000Z",
+            "institution_name": "Access Bank"
+        },
+        {
+            "id": 2,
+            "user_id": 2,
+            "account_number": "0778993320",
+            "institution_code": "000014",
+            "customer_name": "ABIMBOLA SOPHIA BAKARE",
+            "created_at": "2020-09-16T17:14:49.000000Z",
+            "updated_at": "2020-09-16T17:14:49.000000Z",
+            "institution_name": ""
+        },
+        {
+            "id": 3,
+            "user_id": 2,
+            "account_number": "0691391605",
+            "institution_code": "000014",
+            "customer_name": "DANIEL      OLUSEYI BABATUNDE",
+            "created_at": "2020-09-16T17:36:19.000000Z",
+            "updated_at": "2020-09-16T17:36:19.000000Z",
+            "institution_name": ""
+        },
+        {
+            "id": 4,
+            "user_id": 2,
+            "account_number": "0691391605",
+            "institution_code": "000014",
+            "customer_name": "DANIEL      OLUSEYI BABATUNDE",
+            "created_at": "2020-09-16T17:39:52.000000Z",
+            "updated_at": "2020-09-16T17:39:52.000000Z",
+            "institution_name": ""
+        },
+        {
+            "id": 5,
+            "user_id": 2,
+            "account_number": "0008766693",
+            "institution_code": "000013",
+            "customer_name": "BAMIDURO OLUTOSIN S",
+            "created_at": "2020-09-16T20:53:49.000000Z",
+            "updated_at": "2020-09-16T20:53:49.000000Z",
+            "institution_name": ""
+        },
+        {
+            "id": 6,
+            "user_id": 2,
+            "account_number": "0160442378",
+            "institution_code": "000013",
+            "customer_name": "BAKARE  ABIMBOLA SOPHIA",
+            "created_at": "2020-09-17T10:46:08.000000Z",
+            "updated_at": "2020-10-01T15:20:35.000000Z",
+            "institution_name": "GTBANK PLC"
+        },
+        {
+            "id": 7,
+            "user_id": 2,
+            "account_number": "0022794031",
+            "institution_code": "000014",
+            "customer_name": "CAPITAL-PLUS LIMITED",
+            "created_at": "2020-09-17T10:48:56.000000Z",
+            "updated_at": "2020-09-17T10:48:56.000000Z",
+            "institution_name": ""
+        },
+        {
+            "id": 8,
+            "user_id": 2,
+            "account_number": "0169708044",
+            "institution_code": "000013",
+            "customer_name": "ODEJINMI TOBILOBA THOMAS",
+            "created_at": "2020-09-17T10:51:38.000000Z",
+            "updated_at": "2020-09-17T11:24:05.000000Z",
+            "institution_name": "GTBank Plc"
+        },
+        {
+            "id": 9,
+            "user_id": 1,
+            "account_number": "0691391605",
+            "institution_code": "000014",
+            "customer_name": "DANIEL      OLUSEYI BABATUNDE",
+            "created_at": "2020-09-17T17:36:18.000000Z",
+            "updated_at": "2020-09-17T17:36:18.000000Z",
+            "institution_name": "Access Bank"
+        },
+        {
+            "id": 10,
+            "user_id": 1,
+            "account_number": "0003606875",
+            "institution_code": "000013",
+            "customer_name": "BABATUNDE DANIEL OLUSEYI",
+            "created_at": "2020-09-18T16:26:47.000000Z",
+            "updated_at": "2020-09-18T16:26:47.000000Z",
+            "institution_name": "GTBank Plc"
+        },
+        {
+            "id": 11,
+            "user_id": 2,
+            "account_number": "3114685871",
+            "institution_code": "000016",
+            "customer_name": "DUROS FARM AND PRODUCTS LTD",
+            "created_at": "2020-09-22T07:15:14.000000Z",
+            "updated_at": "2020-09-22T07:15:14.000000Z",
+            "institution_name": "First Bank of Nigeria"
+        },
+        {
+            "id": 12,
+            "user_id": 1,
+            "account_number": "1080006404",
+            "institution_code": "090317",
+            "customer_name": "1080006404",
+            "created_at": "2020-09-24T09:14:26.000000Z",
+            "updated_at": "2020-09-24T09:14:26.000000Z",
+            "institution_name": "PATRICK GOLD"
+        },
+        {
+            "id": 13,
+            "user_id": 2,
+            "account_number": "1080007975",
+            "institution_code": "090317",
+            "customer_name": "1080007975",
+            "created_at": "2020-09-24T12:45:12.000000Z",
+            "updated_at": "2020-09-24T12:45:12.000000Z",
+            "institution_name": "PATRICK GOLD"
+        },
+        {
+            "id": 14,
+            "user_id": 2,
+            "account_number": "0141464063",
+            "institution_code": "000013",
+            "customer_name": "OLAGUNJU ADEWALE JAMES",
+            "created_at": "2020-09-27T21:50:41.000000Z",
+            "updated_at": "2020-09-27T21:50:41.000000Z",
+            "institution_name": "GTBANK PLC"
+        },
+        {
+            "id": 15,
+            "user_id": 3,
+            "account_number": "0691391605",
+            "institution_code": "000014",
+            "customer_name": "DANIEL      OLUSEYI BABATUNDE",
+            "created_at": "2020-10-01T15:16:42.000000Z",
+            "updated_at": "2020-10-01T15:16:42.000000Z",
+            "institution_name": "ACCESS BANK"
+        },
+        {
+            "id": 16,
+            "user_id": 4,
+            "account_number": "0008766693",
+            "institution_code": "000013",
+            "customer_name": "BAMIDURO OLUTOSIN S",
+            "created_at": "2020-10-02T00:10:26.000000Z",
+            "updated_at": "2020-10-02T00:10:26.000000Z",
+            "institution_name": "GTBANK PLC"
+        },
+        {
+            "id": 17,
+            "user_id": 3,
+            "account_number": "0003606875",
+            "institution_code": "000013",
+            "customer_name": "BABATUNDE DANIEL OLUSEYI",
+            "created_at": "2020-10-14T20:29:09.000000Z",
+            "updated_at": "2020-10-14T20:29:09.000000Z",
+            "institution_name": "GTBANK PLC"
+        }
+    ],
+    "response_message": "User  Beneficiaries retrieved successfully",
+    "response_code": ""
+}

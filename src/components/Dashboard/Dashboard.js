@@ -4,10 +4,14 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import MenuRounded from '@material-ui/icons/MenuRounded';
+import MyAccount from './MyAccount';
 import Headers from './Include/Header';
 import Navs from './Include/Nav';
 import  logo from '../logo-main.png';
-import myaccount from './myAccount';
+import DashboardContent from './DashboardContent';
+import LoanHistory  from './LoanHistoryPage';
+import LoanCalculator from './LoanCalculatorPage';
+import CopyrightIcon from '@material-ui/icons/Copyright';
 import {
  Root,
  Header,
@@ -42,11 +46,13 @@ return(
        <Navs />
      </Nav>
      <Content>
-     <Route exact path={`${props.match.path}`} component={myaccount}/>
-     <Route exact path={`${props.match.path}/h`} component={myaccount}/>
+     <Route exact path={`${props.match.path}/dashboard`} component={DashboardContent}/>
+     <Route exact path={`${props.match.path}/loan-history`} component={LoanHistory}/>
+     <Route exact path={`${props.match.path}/loan-calculator`} component={LoanCalculator} />
+     <Route exact path={`${props.match.path}/`} component={MyAccount} />
      </Content>
      <Footer>
-       footer
+       <p style={{textAlign: 'center'}}><CopyrightIcon/> {(new Date().getFullYear())} | All rights reserved</p>
      </Footer>
    </Root>
   </ThemeProvider>

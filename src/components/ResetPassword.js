@@ -72,7 +72,7 @@ const CssTextField = withStyles({
     },
   },
 })(TextField);
-export default function SignIn() {
+export default function ResetPassword() {
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -80,10 +80,10 @@ export default function SignIn() {
       <Container className={classes.cont} maxWidth="sm">
        <img className="App" src={ logo } style={{margin: 40}} height="30%" width="30%"></img>
        <Typography variant="h6" gutterBottom>
-         Welcome back!
+       Reset Password!
       </Typography>
       <Typography variant="body2" gutterBottom>
-        Sign in to your dashboard
+        
       </Typography>
       <form className={classes.root} noValidate autoComplete="off">
       <Grid container spacing={3} style={{padding:50}}>
@@ -91,40 +91,24 @@ export default function SignIn() {
         <CssTextField 
         className={classes.textField}
         id="standard-basic" 
-        InputProps={{
-          startAdornment: <InputAdornment position="start">+234</InputAdornment>,
-        }}
-        placeholder="Phone Number"
-       fullWidth/>
+        placeholder="Password"
+        type="password"
+        fullWidth/>
         </Grid>
         <Grid item xs={12}>
         <CssTextField 
         className={classes.textField}
         id="standard-basic" 
-        placeholder="Password"
+        placeholder="Comfirm Password"
         type="password"
         fullWidth/>
-        <Typography  component={Link} to="/send-reset-otp" variant="body2" gutterBottom style={{textAlign: 'left', marginLeft: '50%', textDecoration: 'none', color: 'black'}}>
-            Reset Password
-        </Typography >
         </Grid>
-        
       </Grid>
-      
       <Button component={Link} to="/account/dashboard" className={classes.button} variant="contained">
-        Sign in
+         Reset password
       </Button>
     </form>
-    <Typography variant="body2" gutterBottom>
-       Or
-    </Typography>
-    <Button className={classes.buttonGoogle} variant="contained">
-        <img style={{ margin: 10}} src={google} height="15px" width="15px" ></img>  Sign in with Google 
-      </Button>
-      <br></br>
-      <Typography  component={Link} to="/register" variant="body2" style={{color: 'black', textDecoration: 'none'}} gutterBottom>
-       Don’t have an account?  <span style={{color: '#23D123', cursor: 'pointer', fontWeight: 'bolder'}}  component={Link} to="/register">Register</span>
-      </Typography>
+   
     </Container>
     </React.Fragment>
   );

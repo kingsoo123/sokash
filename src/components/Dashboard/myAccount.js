@@ -1,97 +1,95 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import {Paper, Typography, Button} from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import PersonalInfo from './Include/PersonalInfo'
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `scrollable-auto-tab-${index}`,
+    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // flexGrow: 1,
-    margin: 45,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    margin: 10,
-    color: theme.palette.text.secondary,
-    boxShadow: '0px 4px 12px rgba(35, 209, 35, 0.31)',
-    borderRadius: '20px',
-  },
-  naira:{
-    fontSize: 35,
-    color: "#A6AAB4"
-  }, 
-  amount:{
-    color: "#00683B",
-    fontWeight: 'bolder',
-    fontSize: 80,
-  },
-  button:{
-    height: '58px',
-    width: '21px',
-    border: '1px solid #007945',
-    borderRadius: '50px',
-    minWidth: '60%',
-    margin: 30,
-    color: "#ffffff",
-    backgroundColor: "#007945",
-    "&:hover":{
-       color:"#007945",
-       backgroundColor: "#ffffff",
-    },
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+    padding: 20,
   },
 }));
 
 export default function MyAccount() {
   const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
-        
-        <Grid item xs={6}>
-        <Grid container spacing={1}>
-            <Grid item xs={12}>
-            <Typography variant="h5" gutterBottom>
-                Hi, Tobiloba
-            </Typography>
-            <Paper className={classes.paper}>
-            <Typography variant="h4" gutterBottom>
-               Wallet Balance
-            </Typography>
-            <Typography className={classes.amount} variant="h2" gutterBottom>
-               150,000.00 <span className={classes.naira} >NGN</span>
-            </Typography>
-            </Paper>
+      <AppBar position="static" color="inherity">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example"
+        >
+          <Tab label="Personal Info" {...a11yProps(0)} />
+          <Tab label="Bank Details" {...a11yProps(1)} />
+          <Tab label="Security" {...a11yProps(2)} />
+          <Tab label="Referral" {...a11yProps(3)} />
+         
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={0}>
+        <PersonalInfo />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Item Three
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        Item Four
+      </TabPanel>
 
-            </Grid>
-            <Grid item xs={6}>
-            <Paper className={classes.paper}>
-            <Typography variant="h4" gutterBottom>
-            TAKE A LOAN
-            </Typography>
-            </Paper>
-
-            </Grid>
-            <Grid item xs={6}>
-            <Paper className={classes.paper}>
-            <Typography variant="h4" gutterBottom>
-               PAYBACK
-            </Typography>
-            </Paper>
-
-            </Grid>
-        </Grid>
-        </Grid>
-        <Grid item xs={6}>
-        <Button className={classes.button} variant="contained">
-         loan calculator
-        </Button>
-        <Paper className={classes.paper}>
-        
-        </Paper>
-
-        </Grid>
-      </Grid>
     </div>
   );
 }
