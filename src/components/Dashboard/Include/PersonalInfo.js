@@ -69,7 +69,7 @@ const CssTextField = withStyles({
     },
   })(TextField);
 
-export default function FullWidthGrid() {
+export default function PersonalInfo() {
   const classes = useStyles();
 
   return (
@@ -106,7 +106,7 @@ export default function FullWidthGrid() {
     </Typography >
       </Paper>
         </Grid>
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} sm={4}>
         <Paper className={classes.paper}>
         <CssTextField 
             className={classes.textField}
@@ -163,7 +163,60 @@ export default function FullWidthGrid() {
                 Update
             </Button>
         </Paper>
-        </Grid>        
+        </Grid>  
+        <Grid item xs={12} sm={4}>
+        <Paper className={classes.paper}>
+          <Typography variant="h6" gutterBottom>
+          Next of Kin  
+          </Typography> 
+        <CssTextField 
+            className={classes.textField}
+            id="standard-basic" 
+            placeholder="Name of Next of Kin"
+            type="text"
+            fullWidth/>
+             <CssTextField 
+            className={classes.textField}
+            id="standard-basic" 
+            placeholder="Relationship"
+            type="text"
+            fullWidth/>
+        <CssTextField 
+            className={classes.textField}
+            id="standard-basic" 
+            placeholder="Phone Number"
+            type="number"
+            fullWidth/>
+         <CssTextField 
+            className={classes.textField}
+            id="standard-basic" 
+            placeholder="Gender"
+            type="text"
+            fullWidth/>
+          <CssTextField 
+            className={classes.textField}
+            id="standard-basic" 
+            placeholder="DOB"
+            type="date"
+            fullWidth/>
+          <CssTextField 
+            className={classes.textField}
+            id="standard-basic" 
+            placeholder="Address"
+            type="text"
+            fullWidth/>
+          <CssTextField 
+            className={classes.textField}
+            id="standard-basic" 
+            placeholder="Occupation"
+            type="text"
+            fullWidth/>
+             <Button component={Link} to="/account/dashboard" className={classes.button} variant="contained">
+                Save
+            </Button>
+          </Paper>
+
+        </Grid>  
       </Grid>
     </div>
   );

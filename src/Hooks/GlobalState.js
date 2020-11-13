@@ -15,7 +15,7 @@ const { setGlobalState, useGlobalState } = createGlobalState({
   Business4Open: false,
   Business5Open: false,
   Business6Open: false,
-  Payback: true,
+  Payback: false,
   PaybackPayment: false,
   PaymentConfirmation: false,
 });
