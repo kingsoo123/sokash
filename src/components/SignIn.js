@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, createContext } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {Typography, TextField, makeStyles, Grid, Button, InputAdornment, withStyles} from '@material-ui/core';
 import Container from '@material-ui/core/Container';
@@ -7,6 +7,8 @@ import  logo from './logo-main.png';
 import  google from './google.png';
 
 
+
+export const LoginContext = createContext();
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,9 +75,40 @@ const CssTextField = withStyles({
   },
 })(TextField);
 export default function SignIn() {
+  const [phoneNumber, setPhoneNumber] = useState(null)
+  const [password, setPassword] = useState(null);
+  const [PhoneErrorMessage, setPhoneErrorMessage] = useState("");
+  const [matchColor, setMatchColor] = useState();
+
+console.log(phoneNumber);
+console.log(password);
+
+  const handlePhonNumberChange = (e) => {
+    e.preventDefault();
+    if(Number.isInteger(+e.target.value)){
+      console.log('yes');
+      setPhoneNumber(e.target.value);
+      setPhoneErrorMessage(null);
+      
+    }else{
+      console.log('no');
+      setPhoneErrorMessage("Enter a number");
+      setMatchColor("red");
+    }  
+  };
+
+  const handlePasswordChange = (e) => {
+    e.preventDefault();
+    setPassword(e.target.value);
+  };
+
+
   const classes = useStyles();
   return (
     <React.Fragment>
+      <LoginContext.Provider
+        value={{ phoneNumber, password }}
+      >
       <CssBaseline />
       <Container className={classes.cont} maxWidth="sm">
        <img className="App" src={ logo } style={{margin: 40}} height="30%" width="30%"></img>
@@ -95,7 +128,11 @@ export default function SignIn() {
           startAdornment: <InputAdornment position="start">+234</InputAdornment>,
         }}
         placeholder="Phone Number"
-       fullWidth/>
+       fullWidth
+       onChange={handlePhonNumberChange}/>
+        <small style={{ color: `${matchColor}`, marginRight: 369}}>
+          {PhoneErrorMessage}
+        </small>
         </Grid>
         <Grid item xs={12}>
         <CssTextField 
@@ -103,7 +140,8 @@ export default function SignIn() {
         id="standard-basic" 
         placeholder="Password"
         type="password"
-        fullWidth/>
+        fullWidth
+        onChange={handlePasswordChange}/>
         <Typography  component={Link} to="/send-reset-otp" variant="body2" gutterBottom style={{textAlign: 'left', marginLeft: '50%', textDecoration: 'none', color: 'black'}}>
             Reset Password
         </Typography >
@@ -126,6 +164,7 @@ export default function SignIn() {
        Don’t have an account?  <span style={{color: '#23D123', cursor: 'pointer', fontWeight: 'bolder'}}  component={Link} to="/register">Register</span>
       </Typography>
     </Container>
+    </LoginContext.Provider>
     </React.Fragment>
   );
 }

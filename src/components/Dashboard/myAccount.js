@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import PersonalInfo from './Include/PersonalInfo'
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import PersonalInfo from "./Include/PersonalInfo";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -37,14 +37,14 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+    "aria-controls": `scrollable-auto-tabpanel-${index}`,
   };
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width: '100%',
+    width: "100%",
     backgroundColor: theme.palette.background.paper,
     padding: 20,
   },
@@ -74,7 +74,6 @@ export default function MyAccount() {
           <Tab label="Bank Details" {...a11yProps(1)} />
           <Tab label="Security" {...a11yProps(2)} />
           <Tab label="Referral" {...a11yProps(3)} />
-         
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -89,7 +88,6 @@ export default function MyAccount() {
       <TabPanel value={value} index={3}>
         Item Four
       </TabPanel>
-
     </div>
   );
 }
