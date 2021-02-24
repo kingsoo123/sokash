@@ -80,32 +80,29 @@ const CssTextField = withStyles({
     },
   },
 })(TextField);
-const Register = () => {
-  const [phoneNumber, setPhoneNumber] = useState(null);
-  const [countryCode, setCountryCode] = useState(`+234`);
+const Register = ({history}) => {
+  const [phone_number, setPhoneNumber] = useState(null);
+  const [country_code, setCountryCode] = useState(`234`);
   const [password, setPassword] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState(null);
+  const [confirm_password, setConfirmPassword] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [PhoneErrorMessage, setPhoneErrorMessage] = useState("");
   const [matchColor, setMatchColor] = useState();
 
-  console.log(phoneNumber);
-  console.log(confirmPassword);
-  console.log(password);
+  const RegData = {Phone_number: phone_number, password: password, confirm_password:confirm_password, country_code:country_code};
+  console.log(RegData);
 
   const handlePhonNumberChange = (e) => {
     e.preventDefault();
-    if(Number.isInteger(+e.target.value)){
-      console.log('yes');
+    if (!isNaN(e.target.value)) {
+      console.log("yes");
       setPhoneNumber(e.target.value);
       setPhoneErrorMessage(null);
-      
-    }else{
-      console.log('no');
+    } else {
+      console.log("no");
       setPhoneErrorMessage("Enter a number");
       setMatchColor("red");
     }
-    
   };
 
   const handlePasswordChange = (e) => {
@@ -124,11 +121,30 @@ const Register = () => {
       setMatchColor("red");
     }
   };
+
+
+
+  const handleClick = ()=>{
+    if(RegData.phone_number === '' && RegData.password === '' && RegData.confirm_password === ''){
+      fetch('https://softkash-api.herokuapp.com/api/register', {
+        method: "POST",
+        body: JSON.stringify(RegData),
+        headers: {"Content-type": "application/json; charset=UTF-8"}
+      })
+    .then(response => response.json()) 
+    .then(json => console.log(json))
+    .catch(err => console.log(err))
+    history.push('/verification')
+    }else{
+      console.log('no place to run to');
+    }
+    
+  }
   const classes = useStyles();
   return (
     <React.Fragment>
       <RegisterContext.Provider
-        value={{ phoneNumber, password, countryCode, confirmPassword }}
+        value={{ phone_number, password, country_code, confirm_password }}
       >
         <CssBaseline />
         <Container className={classes.cont} maxWidth="sm">
@@ -154,7 +170,7 @@ const Register = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        {countryCode}
+                        +{country_code}
                       </InputAdornment>
                     ),
                   }}
@@ -162,9 +178,9 @@ const Register = () => {
                   onChange={handlePhonNumberChange}
                   fullWidth
                 />
-                <small style={{ color: `${matchColor}`, marginRight: 369}}>
-                {PhoneErrorMessage}
-              </small>
+                <small style={{ color: `${matchColor}`, marginRight: 369 }}>
+                  {PhoneErrorMessage}
+                </small>
               </Grid>
               <Grid item xs={12}>
                 <CssTextField
@@ -195,7 +211,7 @@ const Register = () => {
               // to="/verification"
               className={classes.button}
               variant="contained"
-              onClick={()=>{console.log('clicked');}}
+              onClick={handleClick}
             >
               Continue
             </Button>
