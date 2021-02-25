@@ -4,7 +4,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import MenuRounded from '@material-ui/icons/MenuRounded';
-import MyAccount from './MyAccount';
+import MyAccount from './myAccount';
 import Headers from './Include/Header';
 import Navs from './Include/Nav';
 import  logo from '../logo-main.png';

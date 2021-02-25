@@ -1,175 +1,166 @@
-import React, {useState, useEffect} from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import {Typography, TextField, makeStyles, Grid, Button, InputAdornment, withStyles} from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import {Link} from 'react-router-dom';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEye } from "@fortawesome/free-solid-svg-icons";
-// import { useForm } from "react-hook-form";
-import  logo from './logo-main.png';
-import  google from './google.png';
-
-
-
+import React, {useContext, useState} from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { UserContext } from "./context/UserContext";
+import {
+  Typography,
+  TextField,
+  makeStyles,
+  Grid,
+  Button,
+  InputAdornment,
+  withStyles,
+} from "@material-ui/core";
+import Container from "@material-ui/core/Container";
+import { Link } from "react-router-dom";
+import logo from "./logo-main.png";
+import google from "./google.png";
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
-      textAlign: 'center',
+    "& > *": {
+      textAlign: "center",
     },
   },
-  cont:{
-    textAlign: 'center',
+  cont: {
+    textAlign: "center",
     marginTop: 90,
   },
-  button:{
-    height: '28px',
-    width: '71px',
-    border: '1px solid #007945',
-    borderRadius: '50px',
-    minWidth: '60%',
+  button: {
+    height: "28px",
+    width: "71px",
+    border: "1px solid #007945",
+    borderRadius: "50px",
+    minWidth: "60%",
     margin: 30,
     color: "#ffffff",
     fontSize: 10,
     backgroundColor: "#007945",
-    "&:hover":{
-       color:"#007945",
-       backgroundColor: "#ffffff",
+    "&:hover": {
+      color: "#007945",
+      backgroundColor: "#ffffff",
     },
   },
-  
-  textField:{
-    color:"#007945",
+
+  textField: {
+    color: "#007945",
   },
   error: {
-    color: 'red',
-    fontSize: '20px',
-    fontWeight: '500'
-},
-eye: {
-    position: 'absolute',
-    top: '38%',
-    right: '-1%',
-}
+    color: "red",
+    fontSize: "20px",
+    fontWeight: "500",
+  },
+  eye: {
+    position: "absolute",
+    top: "38%",
+    right: "-1%",
+  },
 }));
 const CssTextField = withStyles({
-    root: {
-        width: 20,
-      '& label.Mui-focused': {
-        color: 'green',
+  root: {
+    width: 20,
+    "& label.Mui-focused": {
+      color: "green",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "green",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "red",
       },
-      '& .MuiInput-underline:after': {
-        borderBottomColor: 'green',
+      "&:hover fieldset": {
+        borderColor: "yellow",
       },
-      '& .MuiOutlinedInput-root': {
-        '& fieldset': {
-          borderColor: 'red',
-        },
-        '&:hover fieldset': {
-          borderColor: 'yellow',
-        },
-        '&.Mui-focused fieldset': {
-          borderColor: 'green',
-        },
+      "&.Mui-focused fieldset": {
+        borderColor: "green",
       },
     },
-  })(TextField);
+  },
+})(TextField);
 
-export default function Verification() {
+const Verification = ({history}) => {
+  const {phone_number, country_code, token} = useContext(UserContext)
+  const [tokenVerify, setTokenVerify]  = useState('')
+  const [errorMessage, setErrorMessage] = useState(false)
   const classes = useStyles();
 
-  const [passwordShown, setPasswordShown] = useState(false);
-const [counter, setCounter] = useState(15);
-const [disable, setDisable] = useState(false);
-// const { register } = useForm();
-// const eye = <FontAwesomeIcon icon={faEye} />;
+  console.log(token);
 
-
-
-    const togglePasswordVisiblity = () => {
-        setPasswordShown(passwordShown ? false : true);
-    };
-    const [token, setToken] = useState('');
-    const [error, setError] = useState(false);
-    useEffect(() => {
-        if (token.length > 4) {
-            setError(true);
-        } else {
-            setError(false);
-        }
-        disableButton();
-
-
-        //Countdown Timer 
-        const timer =
-            counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-        return () => clearInterval(timer);
-
-    }, [token, counter]);
-    function handleChange(e) {
-        setToken(e.target.value)
-    }
-
-    function inputRegex() {
-        token.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
-    };
-
-    function disableButton() {
-        if (2 == true) {
-            setDisable(true)
-        } else {
-            setDisable(false)
-        }
-    };
-    function validate() {
-        if (token.length === 4) {
-            // props.verifyLogin(token)
-        }
-    }
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <Container className={classes.cont} maxWidth="sm">
-       <img className="App" src={ logo } style={{margin: 40}} height="30%" width="30%"></img>
-       <Typography variant="h4" gutterBottom>
-       Verification Code
-      </Typography>
-      <Typography variant="body2" gutterBottom>
-      An SMS with the 4-digit code has been sent to <p></p>+2348012345678
-      </Typography>
-      <form className={classes.root} noValidate autoComplete="off">
-      <Grid container spacing={3} style={{padding:50}}>
-        <Grid item xs={3}>
-       
-        {/* <div id="divOuter">
-          <div id="divInner">
-            <input id="partitioned" type="text" maxlength="4" />
-          </div>
-        </div> */}
-        
-        </Grid>
-        <Grid item xs={9}>
-       
-        <div id="divOuter">
-          <div id="divInner">
-            <input id="partitioned" type="password" maxlength="4" />
-          </div>
-        </div>
-        
-        </Grid>
-        
-      </Grid>
-      
-      <Typography variant="body2" gutterBottom>
-            Didn’t receive an SMS?
-            We will resend the code in 1:45
-      </Typography>
-       
-      <Button component={Link} to="/account/dashboard" className={classes.button} variant="contained">
-          Verify Phone Number
-      </Button>
-    </form>
-   
-    </Container>
-    </React.Fragment>
-  );
+  const tokenData = {token: token}
+const HandleTokenChange = (e)=>{
+  if (isNaN(e.target.value)) {
+    setErrorMessage(true)
+  }else{
+    setErrorMessage(false) 
+    setTokenVerify(e.target.value)   
+  }
 }
+
+  const verifyPhoneNumber = ()=>{
+    if(tokenVerify === token){
+      fetch('https://softkash-api.herokuapp.com/api/verify_otp', {
+        method: "POST",
+        mode: 'cors',
+        body: JSON.stringify(tokenData),
+        headers: {"Content-type": "application/json; charset=UTF-8"}
+      })
+    .then(response => response.json()) 
+    .then(json => console.log(json))
+    .catch(err => console.log(err))
+    history.push('/account/dashboard')
+    }else{
+      console.log('no place to run to');
+    }
+
+  }
+  return (
+   
+            <React.Fragment>
+            <CssBaseline />
+            <Container className={classes.cont} maxWidth="sm">
+              <img
+                className="App"
+                src={logo}
+                style={{ margin: 40 }}
+                height="30%"
+                width="30%"
+              ></img>
+              <Typography variant="h4" gutterBottom> 
+                Verification Code
+              </Typography>
+              <Typography variant="body2" gutterBottom>
+                An SMS with the 6-digit code has been sent to <p></p>+{country_code}{phone_number}
+              </Typography>
+              <form className={classes.root} noValidate autoComplete="off">
+                <Grid container spacing={3} style={{ padding: 50 }}>
+                  <Grid item xs={3}></Grid>
+                  <Grid item xs={9}>
+                    <div id="divOuter">
+                      <div id="divInner">
+                        <input id="partitioned" type="password" maxlength="6" onChange={HandleTokenChange}/>
+                        <small style={{color:`${errorMessage ? 'red' : 'white'}`}}>{errorMessage ? 'Enter a number' : ''}</small>
+                      </div>
+                    </div>
+                  </Grid>
+                </Grid>
+      
+                <Typography variant="body2" gutterBottom>
+                  Didn’t receive an SMS? We will resend the code in 1:45
+                </Typography>
+      
+                <Button
+                  // component={Link}
+                  // to="/account/dashboard"
+                  className={classes.button}
+                  variant="contained"
+                  onClick={verifyPhoneNumber}
+                >
+                  Verify Phone Number
+                </Button>
+              </form>
+            </Container>
+          </React.Fragment>
+      
+  );
+};
+
+export default Verification;

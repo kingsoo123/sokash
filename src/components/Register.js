@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useContext, useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {
   Typography,
@@ -13,8 +13,9 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import logo from "./logo-main.png";
 import google from "./google.png";
+import { UserContext } from "./context/UserContext";
 
-export const RegisterContext = createContext();
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,16 +82,13 @@ const CssTextField = withStyles({
   },
 })(TextField);
 const Register = ({history}) => {
-  const [phone_number, setPhoneNumber] = useState(null);
-  const [country_code, setCountryCode] = useState(`234`);
-  const [password, setPassword] = useState(null);
-  const [confirm_password, setConfirmPassword] = useState(null);
+  const {phone_number, password, confirm_password, country_code, setPassword, setPhoneNumber, setConfirmPassword, token, setToken} = useContext(UserContext)
   const [errorMessage, setErrorMessage] = useState("");
   const [PhoneErrorMessage, setPhoneErrorMessage] = useState("");
   const [matchColor, setMatchColor] = useState();
 
-  const RegData = {Phone_number: phone_number, password: password, confirm_password:confirm_password, country_code:country_code};
-  console.log(RegData);
+  const RegData = {phone_number: phone_number, password: password, confirm_password:confirm_password, country_code:country_code};
+
 
   const handlePhonNumberChange = (e) => {
     e.preventDefault();
@@ -125,14 +123,15 @@ const Register = ({history}) => {
 
 
   const handleClick = ()=>{
-    if(RegData.phone_number === '' && RegData.password === '' && RegData.confirm_password === ''){
+    if(RegData.phone_number !== '' && RegData.password !== '' && RegData.confirm_password !== ''){
       fetch('https://softkash-api.herokuapp.com/api/register', {
         method: "POST",
+        mode: 'cors',
         body: JSON.stringify(RegData),
         headers: {"Content-type": "application/json; charset=UTF-8"}
       })
     .then(response => response.json()) 
-    .then(json => console.log(json))
+    .then(json => setToken(json.data.verification_token))
     .catch(err => console.log(err))
     history.push('/verification')
     }else{
@@ -142,116 +141,113 @@ const Register = ({history}) => {
   }
   const classes = useStyles();
   return (
-    <React.Fragment>
-      <RegisterContext.Provider
-        value={{ phone_number, password, country_code, confirm_password }}
-      >
-        <CssBaseline />
-        <Container className={classes.cont} maxWidth="sm">
-          <img
-            className="App"
-            src={logo}
-            style={{ margin: 40 }}
-            height="30%"
-            width="30%"
-          ></img>
-          <Typography variant="h6" gutterBottom>
-            Let’s get you started!
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            Create your account
-          </Typography>
-          <form className={classes.root} noValidate autoComplete="off">
-            <Grid container spacing={3} style={{ padding: 50 }}>
-              <Grid item xs={12}>
-                <CssTextField
-                  className={classes.textField}
-                  id="standard-basic"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        +{country_code}
-                      </InputAdornment>
-                    ),
+         <React.Fragment>
+            <CssBaseline />
+            <Container className={classes.cont} maxWidth="sm">
+              <img
+                className="App"
+                src={logo}
+                style={{ margin: 40 }}
+                height="30%"
+                width="30%"
+              ></img>
+              <Typography variant="h6" gutterBottom>
+                Let’s get you started!
+              </Typography>
+              <Typography variant="body2" gutterBottom>
+                Create your account
+              </Typography>
+              <form className={classes.root} noValidate autoComplete="off">
+                <Grid container spacing={3} style={{ padding: 50 }}>
+                  <Grid item xs={12}>
+                    <CssTextField
+                      className={classes.textField}
+                      id="standard-basic"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            +{country_code}
+                          </InputAdornment>
+                        ),
+                      }}
+                      placeholder="Phone Number"
+                      onChange={handlePhonNumberChange}
+                      fullWidth
+                    />
+                    <small style={{ color: `${matchColor}`, marginRight: 369 }}>
+                      {PhoneErrorMessage}
+                    </small>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <CssTextField
+                      className={classes.textField}
+                      id="standard-basic"
+                      placeholder="Password"
+                      type="password"
+                      onChange={handlePasswordChange}
+                      fullWidth
+                    />
+                  </Grid>
+                  <small style={{ color: `${matchColor}`, marginLeft: 10 }}>
+                    {errorMessage}
+                  </small>
+                  <Grid item xs={12}>
+                    <CssTextField
+                      className={classes.textField}
+                      id="standard-basic"
+                      placeholder="Confirm Password"
+                      type="password"
+                      onChange={handleConfirmPasswordChange}
+                      fullWidth
+                    />
+                  </Grid>
+                </Grid>
+                <Button
+                  // component={Link}
+                  // to="/verification"
+                  className={classes.button}
+                  variant="contained"
+                  onClick={handleClick}
+                >
+                  Continue
+                </Button>
+              </form>
+              <Typography variant="body2" gutterBottom>
+                Or
+              </Typography>
+              <Button className={classes.buttonGoogle} variant="contained">
+                <img
+                  style={{ margin: 10 }}
+                  src={google}
+                  height="15px"
+                  width="15px"
+                ></img>{" "}
+                Sign in with Google
+              </Button>
+              <br></br>
+              <Typography
+                component={Link}
+                to="/"
+                variant="body2"
+                style={{ color: "black", textDecoration: "none" }}
+                gutterBottom
+              >
+                Already have an account?{" "}
+                <span
+                  style={{
+                    color: "#23D123",
+                    cursor: "pointer",
+                    fontWeight: "bolder",
                   }}
-                  placeholder="Phone Number"
-                  onChange={handlePhonNumberChange}
-                  fullWidth
-                />
-                <small style={{ color: `${matchColor}`, marginRight: 369 }}>
-                  {PhoneErrorMessage}
-                </small>
-              </Grid>
-              <Grid item xs={12}>
-                <CssTextField
-                  className={classes.textField}
-                  id="standard-basic"
-                  placeholder="Password"
-                  type="password"
-                  onChange={handlePasswordChange}
-                  fullWidth
-                />
-              </Grid>
-              <small style={{ color: `${matchColor}`, marginLeft: 10 }}>
-                {errorMessage}
-              </small>
-              <Grid item xs={12}>
-                <CssTextField
-                  className={classes.textField}
-                  id="standard-basic"
-                  placeholder="Confirm Password"
-                  type="password"
-                  onChange={handleConfirmPasswordChange}
-                  fullWidth
-                />
-              </Grid>
-            </Grid>
-            <Button
-              // component={Link}
-              // to="/verification"
-              className={classes.button}
-              variant="contained"
-              onClick={handleClick}
-            >
-              Continue
-            </Button>
-          </form>
-          <Typography variant="body2" gutterBottom>
-            Or
-          </Typography>
-          <Button className={classes.buttonGoogle} variant="contained">
-            <img
-              style={{ margin: 10 }}
-              src={google}
-              height="15px"
-              width="15px"
-            ></img>{" "}
-            Sign in with Google
-          </Button>
-          <br></br>
-          <Typography
-            component={Link}
-            to="/"
-            variant="body2"
-            style={{ color: "black", textDecoration: "none" }}
-            gutterBottom
-          >
-            Already have an account?{" "}
-            <span
-              style={{
-                color: "#23D123",
-                cursor: "pointer",
-                fontWeight: "bolder",
-              }}
-              component={Link}
-              to="/"
-            >
-              Sign in{" "}
-            </span>
-          </Typography>
-        </Container>
-      </RegisterContext.Provider>
-    </React.Fragment>
+                  component={Link}
+                  to="/"
+                >
+                  Sign in{" "}
+                </span>
+              </Typography>
+            </Container>
+        </React.Fragment>
+    
   );
 };
 
