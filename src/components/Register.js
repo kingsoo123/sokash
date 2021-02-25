@@ -82,12 +82,12 @@ const CssTextField = withStyles({
   },
 })(TextField);
 const Register = ({history}) => {
-  const {phone_number, password, confirm_password, country_code, setPassword, setPhoneNumber, setConfirmPassword, token, setToken} = useContext(UserContext)
+  const {phone_number, password, email, setEmail, confirm_password, country_code, setPassword, setPhoneNumber, setConfirmPassword, setToken} = useContext(UserContext)
   const [errorMessage, setErrorMessage] = useState("");
   const [PhoneErrorMessage, setPhoneErrorMessage] = useState("");
   const [matchColor, setMatchColor] = useState();
 
-  const RegData = {phone_number: phone_number, password: password, confirm_password:confirm_password, country_code:country_code};
+  const RegData = {phone_number:phone_number, password:password, confirm_password:confirm_password, country_code:country_code, email:email};
 
 
   const handlePhonNumberChange = (e) => {
@@ -120,6 +120,10 @@ const Register = ({history}) => {
     }
   };
 
+  const handleEmailChange = (e)=>{
+    setEmail(e.target.value)
+  }
+
 
 
   const handleClick = ()=>{
@@ -136,8 +140,7 @@ const Register = ({history}) => {
     history.push('/verification')
     }else{
       console.log('no place to run to');
-    }
-    
+    } 
   }
   const classes = useStyles();
   return (
@@ -174,10 +177,19 @@ const Register = ({history}) => {
                       onChange={handlePhonNumberChange}
                       fullWidth
                     />
-                    <small style={{ color: `${matchColor}`, marginRight: 369 }}>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <CssTextField
+                      className={classes.textField}
+                      id="standard-basic"
+                      placeholder="Email"
+                      onChange={handleEmailChange}
+                      fullWidth
+                    />
+                  </Grid>
+                  <small style={{ color: `${matchColor}`, marginLeft: 10}}>
                       {PhoneErrorMessage}
                     </small>
-                  </Grid>
                   <Grid item xs={12}>
                     <CssTextField
                       className={classes.textField}

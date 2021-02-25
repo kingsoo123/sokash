@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { UserContext } from "./context/UserContext";
 import {
@@ -77,89 +77,94 @@ const CssTextField = withStyles({
   },
 })(TextField);
 
-const Verification = ({history}) => {
-  const {phone_number, country_code, token} = useContext(UserContext)
-  const [tokenVerify, setTokenVerify]  = useState('')
-  const [errorMessage, setErrorMessage] = useState(false)
+const Verification = ({ history }) => {
+  const { phone_number, country_code, token } = useContext(UserContext);
+  const [tokenVerify, setTokenVerify] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false);
   const classes = useStyles();
 
   console.log(token);
 
-  const tokenData = {token: token}
-const HandleTokenChange = (e)=>{
-  if (isNaN(e.target.value)) {
-    setErrorMessage(true)
-  }else{
-    setErrorMessage(false) 
-    setTokenVerify(e.target.value)   
-  }
-}
-
-  const verifyPhoneNumber = ()=>{
-    if(tokenVerify === token){
-      fetch('https://softkash-api.herokuapp.com/api/verify_otp', {
-        method: "POST",
-        mode: 'cors',
-        body: JSON.stringify(tokenData),
-        headers: {"Content-type": "application/json; charset=UTF-8"}
-      })
-    .then(response => response.json()) 
-    .then(json => console.log(json))
-    .catch(err => console.log(err))
-    history.push('/account/dashboard')
-    }else{
-      console.log('no place to run to');
+  const tokenData = { token: token };
+  const HandleTokenChange = (e) => {
+    if (isNaN(e.target.value)) {
+      setErrorMessage(true);
+    } else {
+      setErrorMessage(false);
+      setTokenVerify(e.target.value);
     }
+  };
 
-  }
+  const verifyPhoneNumber = () => {
+    if (+tokenVerify === token) {
+      fetch("https://softkash-api.herokuapp.com/api/verify_otp", {
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(tokenData),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+      })
+        .then((response) => response.json())
+        .then((json) => console.log(json))
+        .catch((err) => console.log(err));
+      history.push("/account/dashboard");
+    } else {
+      console.log("no place to run to");
+    }
+  };
   return (
-   
-            <React.Fragment>
-            <CssBaseline />
-            <Container className={classes.cont} maxWidth="sm">
-              <img
-                className="App"
-                src={logo}
-                style={{ margin: 40 }}
-                height="30%"
-                width="30%"
-              ></img>
-              <Typography variant="h4" gutterBottom> 
-                Verification Code
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                An SMS with the 6-digit code has been sent to <p></p>+{country_code}{phone_number}
-              </Typography>
-              <form className={classes.root} noValidate autoComplete="off">
-                <Grid container spacing={3} style={{ padding: 50 }}>
-                  <Grid item xs={3}></Grid>
-                  <Grid item xs={9}>
-                    <div id="divOuter">
-                      <div id="divInner">
-                        <input id="partitioned" type="password" maxlength="6" onChange={HandleTokenChange}/>
-                        <small style={{color:`${errorMessage ? 'red' : 'white'}`}}>{errorMessage ? 'Enter a number' : ''}</small>
-                      </div>
-                    </div>
-                  </Grid>
-                </Grid>
-      
-                <Typography variant="body2" gutterBottom>
-                  Didn’t receive an SMS? We will resend the code in 1:45
-                </Typography>
-      
-                <Button
-                  // component={Link}
-                  // to="/account/dashboard"
-                  className={classes.button}
-                  variant="contained"
-                  onClick={verifyPhoneNumber}
-                >
-                  Verify Phone Number
-                </Button>
-              </form>
-            </Container>
-          </React.Fragment>
-      
+    <React.Fragment>
+      <CssBaseline />
+      <Container className={classes.cont} maxWidth="sm">
+        <img
+          className="App"
+          src={logo}
+          style={{ margin: 40 }}
+          height="30%"
+          width="30%"
+        ></img>
+        <Typography variant="h4" gutterBottom>
+          Verification Code
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          An SMS with the 6-digit code has been sent to <p></p>+{country_code}
+          {phone_number}
+        </Typography>
+        <form className={classes.root} noValidate autoComplete="off">
+          <Grid container spacing={3} style={{ padding: 50 }}>
+            <Grid item xs={3}></Grid>
+            <Grid item xs={9}>
+              <div id="divOuter">
+                <div id="divInner">
+                  <input
+                    id="partitioned"
+                    type="password"
+                    maxlength="6"
+                    onChange={HandleTokenChange}
+                  />
+                  <small style={{ color: `${errorMessage ? "red" : "white"}` }}>
+                    {errorMessage ? "Enter a number" : ""}
+                  </small>
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+
+          <Typography variant="body2" gutterBottom>
+            Didn’t receive an SMS? We will resend the code 
+          </Typography>
+
+          <Button
+            // component={Link}
+            // to="/account/dashboard"
+            className={classes.button}
+            variant="contained"
+            onClick={verifyPhoneNumber}
+          >
+            Verify Phone Number
+          </Button>
+        </form>
+      </Container>
+    </React.Fragment>
   );
 };
 

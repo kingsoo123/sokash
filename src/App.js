@@ -15,7 +15,8 @@ import { UserContext } from "./components/context/UserContext";
 
 
 function App() {
-  const [phone_number, setPhoneNumber] = useState('');
+  const [phone_number, setPhoneNumber] = useState('0000');
+  const [email, setEmail] = useState('0000');
   const [country_code, setCountryCode] = useState(`234`);
   const [password, setPassword] = useState('');
   const [confirm_password, setConfirmPassword] = useState('');
@@ -25,18 +26,19 @@ function App() {
     <div>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={SignIn} />
           
           <Route path="/reset-password" component={ResetPasswrod} />
           <Route path="/send-reset-otp" component={SendResetOtp} />
           <Route path="/verify-reset" component={VerifyReset} />
           <Route path="/account" component={Dashboard} />
 
-          <UserContext.Provider value={{phone_number, setPhoneNumber, country_code, setCountryCode, password, setPassword, confirm_password, setConfirmPassword, token, setToken}}>
+          <UserContext.Provider value={{phone_number, setPhoneNumber, email, setEmail, country_code, setCountryCode, password, setPassword, confirm_password, setConfirmPassword, token, setToken}}>
           <Route path="/register" component={Register} />
           <Route path="/verification" component={Verification} />
           <Route path="/testtwo" component={TestTwo} />
           <Route path="/testthree" component={TestThree} />
+          <Route exact path="/" component={SignIn} />
+
           </UserContext.Provider>
           
 
