@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{useContext, useState} from 'react';
+import {UserContext} from '../context/UserContext';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -112,8 +113,11 @@ export default function PersonalLoan1() {
     const classes = useStyles();
     const [age, setAge] = React.useState('');
 
-    const handleChange = (event) => {
-        setAge(event.target.value);
+
+    const {loanReason,setLoanReason} = useContext(UserContext)
+
+    const handleChange = (e) => {
+        setLoanReason(e.target.value)
     };
 
     const handleClickOpen = () => {
@@ -183,12 +187,12 @@ export default function PersonalLoan1() {
                             <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={age}
+                           
                             onChange={handleChange}
                             >
-                            <MenuItem value={10}>Rent</MenuItem>
-                            <MenuItem value={20}>School Fees</MenuItem>
-                            <MenuItem value={30}>Buy Land</MenuItem>
+                            <MenuItem value="Rent">Rent</MenuItem>
+                            <MenuItem value="School Fees">School Fees</MenuItem>
+                            <MenuItem value="Buy Land">Buy Land</MenuItem>
                             </Select>
                         </FormControl>            
                         </Grid>

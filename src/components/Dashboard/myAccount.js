@@ -7,6 +7,7 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import PersonalInfo from "./Include/PersonalInfo";
+import BankDetails from "./Include/BankDetails";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -72,15 +73,15 @@ export default function MyAccount() {
         >
           <Tab label="Personal Info" {...a11yProps(0)} />
           <Tab label="Bank Details" {...a11yProps(1)} />
-          <Tab label="Security" {...a11yProps(2)} />
-          <Tab label="Referral" {...a11yProps(3)} />
+          {/* <Tab label="Security" {...a11yProps(2)} />
+          <Tab label="Referral" {...a11yProps(3)} /> */}
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <PersonalInfo />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+      <BankDetails />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

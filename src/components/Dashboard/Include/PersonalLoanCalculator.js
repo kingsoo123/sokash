@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import {UserContext} from '../../context/UserContext';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import {Grid, TextField, withStyles,Typography} from '@material-ui/core';
+import {Grid, TextField, withStyles,Typography, Button} from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -90,7 +91,31 @@ export default function PersonnalLoanCalculator() {
    
   const handleChange = (event) => {
     setAge(event.target.value);
+    console.log('tenure');
   };
+
+
+  const {id, token} = useContext(
+    UserContext
+  );
+
+  const CalculateLoan = async ()=>{
+    
+
+      await fetch('https://backend.api.sokash.co/public/api/loans/calculate', {
+         method: "POST",
+         body: JSON.stringify({user_id:id, amount:principal, tenure:+age}),
+         Authorization: `token ${token}`,
+         headers: {"Content-type": "application/json; charset=UTF-8"}
+       })
+     .then(response => response.json()) 
+     .then(json => {
+     console.log('success');
+     })
+     .catch(err => console.log(err))
+     console.log('failure');
+     }
+  
 
   const data = {
     labels: ['Total Payback', 'Total Interest'],
@@ -165,9 +190,18 @@ export default function PersonnalLoanCalculator() {
             <MenuItem value={10}>Month</MenuItem>
             <MenuItem value={20}>Years</MenuItem>
             </Select>
+
+<br/><br/>
+            <Button
+              className={classes.button}
+                  variant="contained"
+                  onClick={CalculateLoan}    
+                >
+                  Calculate
+                </Button>
         </FormControl>
         </Grid>
-
+{/* 
         <Grid item xs={12} sm={5}>
         <CssTextField 
             className={classes.textField}
@@ -178,12 +212,12 @@ export default function PersonnalLoanCalculator() {
             value={repaymentPlan.toFixed(2)}
             disabled
             />    
-        </Grid>
+        </Grid> */}
 
         <Grid item xs={12} sm={5}>
         <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-helper-label">Tenure</InputLabel>
-        <Select
+        {/* <InputLabel id="demo-simple-select-helper-label">Tenure</InputLabel> */}
+        {/* <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
           value={age}
@@ -195,7 +229,7 @@ export default function PersonnalLoanCalculator() {
           </MenuItem>
           <MenuItem value={10}>Month</MenuItem>
           <MenuItem value={20}>Years</MenuItem>
-        </Select>
+        </Select> */}
       </FormControl>
         </Grid>
         

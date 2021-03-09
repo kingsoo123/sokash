@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
+import {UserContext} from '../context/UserContext';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -78,6 +79,15 @@ export default function Index() {
   const [Business, setBusiness] = useGlobalState('Business1Open');
 
 
+  const {loanType,setLoanType} = useContext(UserContext)
+  
+
+
+  const activateLoanType=(e)=>{
+    setLoanType(e.currentTarget.innerText)
+  }
+
+  console.log(loanType);
   const classes = useStyles();
 
   const handleClickOpen = () => {
@@ -102,14 +112,14 @@ export default function Index() {
          </Grid>
         <Grid item xs={12} sm={12}>
           <Paper className={classes.paper} onClick={() => {setPersonal1(true); setOpen(false);}}>
-          <Typography variant="h5" gutterBottom>
-              <AccountCircleIcon style={{color: '#00683B', fontSize: 35, cursor: 'pointer'}} />  Personal loan
+          <Typography variant="h5" gutterBottom onClick={activateLoanType}>
+              <AccountCircleIcon style={{color: '#00683B', fontSize: 35, cursor: 'pointer'}} /> Personal loan
             </Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12}>
           <Paper className={classes.paper} onClick={() => {setBusiness(true); setOpen(false)}}>
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h5" gutterBottom onClick={activateLoanType}>
               <BusinessCenterIcon  style={{color: '#00683B', fontSize: 35, cursor: 'pointer'}}/>  Business loan
             </Typography>
           </Paper>

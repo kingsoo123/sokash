@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -70,23 +70,7 @@ function createData(date, category, purpose, interest, duration, amount, total, 
   return { date, category, purpose, interest, duration, amount, total, status };
 }
 
-const rows = [
-  createData('2020-10-22', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Medical', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Fees', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Medical', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Business', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22 ', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-  createData('2020-10-22', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
-];
+
 
 const useStyles = makeStyles({
   root: {
@@ -100,6 +84,36 @@ const useStyles = makeStyles({
 });
 
 export default function StickyHeadTable() {
+const [tableData, setTableData] = useState([])
+
+
+console.log(tableData);
+
+
+
+  const newRow =tableData.map(data=>{
+    return createData(data.created_at, data.loan_type, data.reason, data.interest_rate, `${data.tenure}${data.tenure_type}`, data.amount, data.total_amount_and_interest, data.status);
+  })
+
+
+// const rows = [
+//   createData('2020-10-22', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid'),
+//   createData('2020-10-22', 'Personal Loan', 'Rent', '5%', '6 months', 'NGN 50,000.00', 'ngn 50,000.00', 'Paid')
+// ];
+
+
+
+useEffect(async ()=>{
+  await fetch(`https://backend.api.sokash.co/public/api/loans`)
+  .then((response) => response.json())
+  .then((result) => {
+    setTableData(result.data.data)
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+},[])
+
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -131,7 +145,7 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+            {newRow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
@@ -151,7 +165,7 @@ export default function StickyHeadTable() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 50, 100]}
         component="div"
-        count={rows.length}
+        count={newRow.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

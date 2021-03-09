@@ -82,6 +82,7 @@ const CssTextField = withStyles({
 export default function SignIn({history}) {
   const {phone_number, password, email, setEmail, setPhoneNumber, setPassword} = useContext(UserContext)
   const [PhoneErrorMessage, setPhoneErrorMessage] = useState("");
+  const [EmailErrorMessage, setEmailErrorMessage] = useState("");
   const [matchColor, setMatchColor] = useState();
 
 const loginData = {phone_number:phone_number, password:password, email:email}
@@ -98,7 +99,15 @@ const loginData = {phone_number:phone_number, password:password, email:email}
   };
 
   const handleEmailChange = (e)=>{
-    setEmail(e.target.value)
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(e.target.value))
+    {
+      setEmail(e.target.value)
+      setEmailErrorMessage(null)
+    }else{
+      setEmailErrorMessage('Enter a valid email')
+      setMatchColor("red");
+    }
+    
   }
 
   const handlePasswordChange = (e) => {
@@ -107,15 +116,18 @@ const loginData = {phone_number:phone_number, password:password, email:email}
 
   const handleClick = (e)=>{
     e.preventDefault();
-    if(loginData.phone_number !== '' && loginData.password !== ''){
-      fetch('https://softkash-api.herokuapp.com/api/login', {
+    if(loginData?.phone_number !== '' && loginData?.password !== ''){
+      fetch('https://backend.api.sokash.co/public/api/login', {
         method: "POST",
-        mode: 'cors',
+        mode: 'no-cors',
         body: JSON.stringify(loginData),
         headers: {"Content-type": "application/json; charset=UTF-8"}
       })
     .then(response => response.json()) 
-    .then(json => console.log(json))
+    .then(json => {
+      console.log(json);
+      localStorage.setItem('tokenData', json.data.token)
+    })
     .catch(err => console.log(err))
     setTimeout(() => {
       history.push("/account/dashboard")
@@ -172,7 +184,9 @@ const loginData = {phone_number:phone_number, password:password, email:email}
                 fullWidth
                 onChange={handleEmailChange}
               />
+              
             </Grid>
+            <small style={{ color: `${matchColor}`, marginLeft: 10}}>{EmailErrorMessage}</small>
             <Grid item xs={12}>
               <CssTextField
                 className={classes.textField}
@@ -209,7 +223,7 @@ const loginData = {phone_number:phone_number, password:password, email:email}
             Sign in
           </Button>
         </form>
-        <Typography variant="body2" gutterBottom>
+        {/* <Typography variant="body2" gutterBottom>
           Or
         </Typography>
         <Button className={classes.buttonGoogle} variant="contained">
@@ -220,7 +234,7 @@ const loginData = {phone_number:phone_number, password:password, email:email}
             width="15px"
           ></img>{" "}
           Sign in with Google
-        </Button>
+        </Button> */}
         <br></br>
         <Typography
           component={Link}

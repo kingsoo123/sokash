@@ -78,14 +78,14 @@ const CssTextField = withStyles({
 })(TextField);
 
 const Verification = ({ history }) => {
-  const { phone_number, country_code, token } = useContext(UserContext);
+  const { phone_number, country_code, otp, id } = useContext(UserContext);
   const [tokenVerify, setTokenVerify] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
   const classes = useStyles();
 
-  console.log(token);
+  console.log(otp, id);
 
-  const tokenData = { token: token };
+  const tokenData = { token: otp };
   const HandleTokenChange = (e) => {
     if (isNaN(e.target.value)) {
       setErrorMessage(true);
@@ -96,17 +96,19 @@ const Verification = ({ history }) => {
   };
 
   const verifyPhoneNumber = () => {
-    if (+tokenVerify === token) {
-      fetch("https://softkash-api.herokuapp.com/api/verify_otp", {
+    if (+tokenVerify === otp) {
+      fetch("https://backend.api.sokash.co/public/api/verify_otp", {
         method: "POST",
         mode: "cors",
         body: JSON.stringify(tokenData),
         headers: { "Content-type": "application/json; charset=UTF-8" },
       })
         .then((response) => response.json())
-        .then((json) => console.log(json))
+        .then((json) => {
+          console.log(json);
+          localStorage.setItem('tokenData', json.data.token)})
         .catch((err) => console.log(err));
-      history.push("/account/dashboard");
+      history.push("/account");
     } else {
       console.log("no place to run to");
     }
@@ -126,7 +128,7 @@ const Verification = ({ history }) => {
           Verification Code
         </Typography>
         <Typography variant="body2" gutterBottom>
-          An SMS with the 6-digit code has been sent to <p></p>+{country_code}
+          An SMS with the 6-digit code has been sent to <p></p>+({country_code})
           {phone_number}
         </Typography>
         <form className={classes.root} noValidate autoComplete="off">

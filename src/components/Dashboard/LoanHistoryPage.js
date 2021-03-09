@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import {Grid,Typography, Button} from '@material-ui/core';
 import LoanHistory from './Include/LoanHistory';
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,7 +44,8 @@ export default function LoanHistoryPage() {
         <Grid item xs={12} sm={12}>
         <Typography variant="h4" gutterBottom>
           Loan History
-          <Button className={classes.button} variant="contained">
+          <Button className={classes.button} variant="contained" component={Link}
+            to="/account/loan-calculator">
          loan calculator
         </Button>
         </Typography>

@@ -26,7 +26,7 @@ const baseTheme = createMuiTheme(); // or use your own theme;
 const config = presets.createStandardLayout();
 
 export default function Dashboard(props) { 
-console.log(props)
+//console.log(props)
 return(
   <ThemeProvider theme={baseTheme}>
    <Root config={config}>

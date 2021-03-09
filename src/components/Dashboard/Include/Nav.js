@@ -90,7 +90,8 @@ export default function SelectedListItem() {
             <LocalConvenienceStoreOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="Loan Calculator" />
-        </ListItem><ListItem
+        </ListItem>
+        {/* <ListItem
           button
           selected={selectedIndex === 4}
           onClick={(event) => handleListItemClick(event, 4)}
@@ -108,7 +109,8 @@ export default function SelectedListItem() {
             <PostAddOutlinedIcon /> 
           </ListItemIcon>
           <ListItemText primary="Recent News" />
-        </ListItem><ListItem
+        </ListItem>
+        <ListItem
           button
           selected={selectedIndex === 6}
           onClick={(event) => handleListItemClick(event, 6)}
@@ -117,7 +119,8 @@ export default function SelectedListItem() {
             <CallOutlinedIcon /> 
           </ListItemIcon>
           <ListItemText primary="Contact" />
-        </ListItem><ListItem
+        </ListItem>
+        <ListItem
           button
           selected={selectedIndex === 7}
           onClick={(event) => handleListItemClick(event, 7)}
@@ -126,7 +129,8 @@ export default function SelectedListItem() {
             <ContactSupportOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="FAQ" />
-        </ListItem><ListItem
+        </ListItem>
+        <ListItem
           button
           selected={selectedIndex === 8}
           onClick={(event) => handleListItemClick(event, 8)}
@@ -145,7 +149,7 @@ export default function SelectedListItem() {
             <GroupAddOutlinedIcon /> 
           </ListItemIcon>
           <ListItemText primary="Refer and earn" />
-        </ListItem>
+        </ListItem> */}
         <ListItem
           component={Link} to="/"
           button

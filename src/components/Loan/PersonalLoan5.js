@@ -129,7 +129,7 @@ export default function PersonalLoan4() {
             <Dialog onClose={handleClose} TransitionComponent={Transition}
                 aria-labelledby="customized-dialog-title" open={openPersonal5}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    <ArrowBackIcon onClick={() => { setOpenPersonal4(true); setOpenPersonal5(false); }} style={{ cursor: 'pointer' }} />
+                    <ArrowBackIcon onClick={() => { setOpenPersonal4(true); setOpenPersonal5(false); }} style={{ cursor: 'pointer' }}/>
                     <Stepper activeStep={activeStep}  alternativeLabel>
                         {steps.map((label) => (
                             <Step key={label} style={{color: '#00683B'}}>
@@ -142,16 +142,16 @@ export default function PersonalLoan4() {
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={12}>
                           <div style={{textAlign: 'center'}}>
-                            <VerifiedUserIcon className={classes.success} />
+                            <VerifiedUserIcon className={classes.success}/>
                           </div>
                         </Grid>
                         <Grid item xs={12} sm={12}>
                         <Typography style={{textAlign: 'center'}} variant="h5" gutterBottom>
-                            Why do you need the loan?
+                            Success!
                         </Typography>
                         </Grid>
                         <Grid item xs={12} sm={12}>
-                        <div style={{textAlign: 'center'}} >
+                        <div style={{textAlign: 'center'}}>
                         <Typography variant="p" gutterBottom>
                          Your loan application has been received. You will receive a notification on the status of your application shortly. Thank you!     
                         </Typography>

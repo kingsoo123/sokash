@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {UserContext} from '../context/UserContext';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Button, TextField} from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
@@ -129,6 +130,9 @@ export default function PersonalLoan3() {
     const [, setAge] = React.useState('');
 
 
+    const { BusinessName, setBusinessName, BusinessDesc, setBusinessDesc, AccountNumber, setAccountNumber} = useContext(UserContext)
+    console.log(AccountNumber);
+
     const handleClose = () => {
         setOpenPersonal3(false);
     };
@@ -160,28 +164,31 @@ export default function PersonalLoan3() {
                         </Grid>
                         <Grid item xs={12} sm={12}>
                          <div style={{margin: 25, }}>
-                        <CssTextField 
-                            className={classes.textField}
-                            id="standard-basic" 
-                            placeholder="Bank Verification Number"
+                         <input
                             type="number"
-                            fullWidth/>
+                            placeholder="Enter Amount"
+                            onChange={(e) => {
+                            console.log('account');
+                            }}
+                        />
                         </div>
                          <div style={{margin: 25, }}>
-                        <CssTextField 
-                            className={classes.textField}
-                            id="standard-basic" 
-                            placeholder="Bank Name"
+                         <input
                             type="text"
-                            fullWidth/>
+                            placeholder="Business Type"
+                            onChange={(e) => {
+                            console.log('account');
+                            }}
+                        />
                         </div>
                          <div style={{margin: 25, }}>
-                        <CssTextField 
-                            className={classes.textField}
-                            id="standard-basic" 
-                            placeholder="Account Number"
-                            type="number"
-                            fullWidth/>
+                         <input
+                            type="text"
+                            placeholder="Business Description"
+                            onChange={(e) => {
+                            console.log('account');
+                            }}
+                        />
                         </div>         
                         </Grid>
                         <Grid item xs={12} sm={12}>
